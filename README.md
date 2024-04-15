@@ -10,26 +10,26 @@ The following instructions are based on the official documentation of Apache Kaf
 1. Download the latest kafka and extract it
 
 ```
-tar -xzf kafka_2.13-3.4.0.tgz
-cd kafka_2.13-3.4.0
+tar -xzf kafka_x.xx-x.x.x.tgz
+cd kafka_x.xx-x.x.x
 ```
 
-2. Start the ZooKeper server in one terminal
+2. Start the ZooKeper server in one terminal1
 ```
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
-3. Start the Kafka server in another terminal
+3. Start the Kafka server in another terminal2
 ```
 bin/kafka-server-start.sh config/server.properties
 ```
 
-4. Create a topic in another terminal
+4. Create a topic in another terminal3
 ```
 bin/kafka-topics.sh --create --topic deepstream-topic --bootstrap-server localhost:9092
 ```
 
-5. In the same terminal run the console consumer client to read the events
+5. In the same terminal3 run the console consumer client to read the events
 
 ```
 bin/kafka-console-consumer.sh --topic deepstream-topic --from-beginning --bootstrap-server localhost:9092
@@ -37,11 +37,11 @@ bin/kafka-console-consumer.sh --topic deepstream-topic --from-beginning --bootst
 
 Take into account that the the host, port and topic used to setup the server should be used at the moment of providing the connection string to the deepstream application: <host>;<port>;<topic>.
 
-## How to run the application
+## How to run the application in Ubuntu20 with Nvidia RTX2080Ti GPU
 
 1. Pull deepstream python bindings docker
 ```
-docker pull serge3006/deepstream-python-bindings-6.1
+docker pull nvcr.io/nvidia/deepstream:6.1-triton
 ```
 
 2. Allow external applications to connect to the host's X display:
@@ -54,7 +54,7 @@ export DISPLAY =:1
 ```
 4. Run the docker container
 ```
-docker run --gpus all -it --net=host --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v <app_folder>/:/app/ -w /app/ -e DISPLAY=$DISPLAY serge3006/deepstream-python-bindings-6.1
+docker run --gpus all -it --net=host --privileged -v /tmp/.X11-unix:/tmp/.X11-unix -v <app_folder>/:/app/ -w /app/ -e DISPLAY=$DISPLAY nvcr.io/nvidia/deepstream:6.1-triton
 ```
 5. Install Apache Kafka requirements inside docker
 
