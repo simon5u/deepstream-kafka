@@ -66,19 +66,20 @@ cd librdkafka
 git reset --hard 063a9ae7a65cebdf1cc128da9815c05f91a2a996
 ./configure
 make
-sudo make install
-sudo cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-5.0/lib
+make install
+cp /usr/local/lib/librdkafka* /opt/nvidia/deepstream/deepstream-6.1/lib
 ```
 
 Install additional dependencies:
 ```
-sudo apt-get install libglib2.0 libglib2.0-dev
-sudo apt-get install libjansson4 libjansson-dev
+apt update
+apt-get install libglib2.0 libglib2.0-dev
+apt-get install libjansson4 libjansson-dev
 ```
 
 6. Install requirements.txt
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 7. Run the application
